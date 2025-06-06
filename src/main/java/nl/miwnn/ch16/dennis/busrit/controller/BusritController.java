@@ -9,6 +9,7 @@ public class BusritController {
 
     @GetMapping
     private String showBusOverview(Model dataModel) {
+        dataModel.
         dataModel.addAttribute("attribute", "value");
 
         return "busOverview";
