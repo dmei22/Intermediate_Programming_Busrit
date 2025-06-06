@@ -5,7 +5,18 @@
     <title>Busoverviews</title>
 </head>
 <body>
-    <h1>Busoverviews</h1>
-    <p><span th:text="${attribute}"></span></p>
+    <h1>Busoverview</h1>
+    <table>
+        <tr>
+            <th>Lijnnummer</th>
+            <th>Regio</th>
+            <th>Zitplaatsen</th>
+        </tr>
+        <tr th:each="bus : ${allBusses}">
+            <td th:text="${bus.lijnnummer}"></td>
+            <td th:text="${bus.regio}"></td>
+            <td th:text="${bus.zitplaatsen}"></td>
+        </tr>
+    </table>
 </body>
 </html>
