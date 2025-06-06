@@ -2,21 +2,23 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Busoverviews</title>
+    <title>Busoverview</title>
 </head>
 <body>
     <h1>Busoverview</h1>
     <table>
         <tr>
-            <th>Lijnnummer</th>
-            <th>Regio</th>
-            <th>Zitplaatsen</th>
+            <th>Line Number</th>
+            <th>Region</th>
+            <th>Number of Seats</th>
         </tr>
         <tr th:each="bus : ${allBusses}">
-            <td th:text="${bus.lijnnummer}"></td>
-            <td th:text="${bus.regio}"></td>
-            <td th:text="${bus.zitplaatsen}"></td>
+            <td th:text="${bus.lineNumber}"></td>
+            <td th:text="${bus.region}"></td>
+            <td th:text="${bus.numberOfSeats}"></td>
         </tr>
     </table>
+
+    <a th:href="@{/bus/new}">Add new Bus</a>
 </body>
 </html>

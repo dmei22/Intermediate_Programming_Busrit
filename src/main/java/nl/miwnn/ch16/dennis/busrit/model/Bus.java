@@ -10,14 +10,14 @@ public class Bus {
     @Id @GeneratedValue
     private long busId;
 
-    private int lijnnummer;
-    private String regio;
-    private int zitplaatsen;
+    private int lineNumber;
+    private String region;
+    private int numberOfSeats;
 
     @Override
     public String toString() {
-        return String.format("bus %d regio %s- %d zitplaatsen",
-                busId, regio, zitplaatsen);
+        return String.format("bus %d region %s- %d no. seats",
+                busId, region, numberOfSeats);
     }
 
     public long getBusId() {
@@ -28,27 +28,27 @@ public class Bus {
         this.busId = busId;
     }
 
-    public int getLijnnummer() {
-        return lijnnummer;
+    public int getLineNumber() {
+        return lineNumber;
     }
 
-    public void setLijnnummer(int lijnnummer) {
-        this.lijnnummer = lijnnummer;
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
     }
 
-    public String getRegio() {
-        return regio;
+    public String getRegion() {
+        return region;
     }
 
-    public void setRegio(String regio) {
-        this.regio = regio;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public int getZitplaatsen() {
-        return zitplaatsen;
+    public int getNumberOfSeats() {
+        return numberOfSeats;
     }
 
-    public void setZitplaatsen(int zitplaatsen) {
-        this.zitplaatsen = zitplaatsen;
+    public void setNumberOfSeats(int numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
     }
 }
