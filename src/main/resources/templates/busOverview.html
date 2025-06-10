@@ -11,11 +11,17 @@
             <th>Line Number</th>
             <th>Region</th>
             <th>Number of Seats</th>
+            <th>Operating Routes</th>
+            <th></th>
+            <th></th>
         </tr>
         <tr th:each="bus : ${allBusses}">
             <td th:text="${bus.lineNumber}"></td>
             <td th:text="${bus.region}"></td>
             <td th:text="${bus.numberOfSeats}"></td>
+            <td><span th:text="${bus.numberOfAvailableRoutes}"></span> / <span th:text="${bus.numberOfRoutes}"></span></td>
+            <td><a th:href="@{/bus/delete/{busId}(busId = ${bus.busId})}">delete</a></td>
+            <td><a th:href="@{/route/new/{busId}(busId = ${bus.busId})}">add new Route</a></td>
         </tr>
     </table>
 
