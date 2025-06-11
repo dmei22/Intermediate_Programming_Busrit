@@ -2,6 +2,7 @@ package nl.miwnn.ch16.dennis.busrit.controller;
 
 import nl.miwnn.ch16.dennis.busrit.model.Bus;
 import nl.miwnn.ch16.dennis.busrit.repositories.BusRepository;
+import nl.miwnn.ch16.dennis.busrit.repositories.TravelerRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class BusController {
 
     private final BusRepository busRepository;
+    private final TravelerRepository travelerRepository;
 
-    public BusController(BusRepository busRepository) {
+    public BusController(BusRepository busRepository, TravelerRepository travelerRepository) {
         this.busRepository = busRepository;
+        this.travelerRepository = travelerRepository;
     }
 
     @GetMapping({"/", "/bus/overview"})
@@ -29,6 +32,7 @@ public class BusController {
     @GetMapping("/bus/new")
     private String showNewBusForm(Model dataModel) {
         dataModel.addAttribute("busForm", new Bus());
+        dataModel.addAttribute("allTravelers", travelerRepository.findAll());
 
         return "busForm";
     }

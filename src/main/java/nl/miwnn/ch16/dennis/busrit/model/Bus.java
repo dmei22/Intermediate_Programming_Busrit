@@ -1,12 +1,10 @@
 package nl.miwnn.ch16.dennis.busrit.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Bus {
@@ -20,6 +18,9 @@ public class Bus {
 
     @OneToMany(mappedBy = "bus")
     private List<Route> routes;
+
+    @ManyToMany
+    private Set<Traveler> travelers;
 
     public int getNumberOfRoutes() {
         return routes.size();
@@ -37,12 +38,23 @@ public class Bus {
         return numberOfAvailableRoutes;
     }
 
+    public String getTravelerNames() {
+        StringBuilder returnString = new StringBuilder();
+
+        for (Traveler traveler : travelers) {
+            returnString.append(traveler.getName()).append(", ");
+        }
+
+        return returnString.toString();
+    }
+
     @Override
     public String toString() {
         return String.format("bus %d region %s- %d no. seats",
                 busId, region, numberOfSeats);
 
     }
+
 
     public long getBusId() {
         return busId;
@@ -82,5 +94,13 @@ public class Bus {
 
     public void setRoutes(List<Route> routes) {
         this.routes = routes;
+    }
+
+    public Set<Traveler> getTravelers() {
+        return travelers;
+    }
+
+    public void setTravelers(Set<Traveler> travelers) {
+        this.travelers = travelers;
     }
 }
