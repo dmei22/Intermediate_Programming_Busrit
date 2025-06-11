@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Bus {
@@ -12,11 +13,14 @@ public class Bus {
     @GeneratedValue
     private long busId;
 
+    @Column(unique = true)
     private int lineNumber;
+
     private String region;
     private int numberOfSeats;
+    private String imageUrl;
 
-    @OneToMany(mappedBy = "bus")
+    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL)
     private List<Route> routes;
 
     @ManyToMany
@@ -39,13 +43,7 @@ public class Bus {
     }
 
     public String getTravelerNames() {
-        StringBuilder returnString = new StringBuilder();
-
-        for (Traveler traveler : travelers) {
-            returnString.append(traveler.getName()).append(", ");
-        }
-
-        return returnString.toString();
+        return travelers.stream().map(Traveler::getName).sorted().collect(Collectors.joining(", "));
     }
 
     @Override
@@ -102,5 +100,13 @@ public class Bus {
 
     public void setTravelers(Set<Traveler> travelers) {
         this.travelers = travelers;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
