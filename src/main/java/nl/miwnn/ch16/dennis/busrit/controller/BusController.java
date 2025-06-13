@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Controller
 public class BusController {
 
@@ -22,9 +24,18 @@ public class BusController {
         this.travelerRepository = travelerRepository;
     }
 
+    private String setupBusDetail(Model dataModel, Bus busToShow, Bus formBus, boolean formModalHidden) {
+        dataModel.addAttribute("bus", busToShow);
+        dataModel.addAttribute("formBus", formBus);
+        dataModel.addAttribute("allBuses", busRepository.findAll());
+        dataModel.addAttribute("formModalHidden", formModalHidden);
+
+        return "busDetails";
+    }
+
     @GetMapping({"/", "/bus/overview"})
     private String showBusOverview(Model dataModel) {
-        dataModel.addAttribute("allBusses", busRepository.findAll());
+        dataModel.addAttribute("allBuses", busRepository.findAll());
 
         return "busOverview";
     }
@@ -53,6 +64,17 @@ public class BusController {
         busRepository.deleteById(busId);
 
         return "redirect:/bus/overview";
+    }
+
+    @GetMapping("/bus/detail/{lineNumber}")
+    private String showBusDetailPage(@PathVariable("lineNumber") int lineNumber, Model dataModel) {
+        Optional<Bus> busOptional = busRepository.findByLineNumber(lineNumber);
+
+        if (busOptional.isEmpty()) {
+            return "redirect:/bus/overview";
+        }
+
+        return setupBusDetail(dataModel, busOptional.get(), busOptional.get(), true);
     }
 }
 

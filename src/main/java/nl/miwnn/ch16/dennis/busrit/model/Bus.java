@@ -30,7 +30,7 @@ public class Bus {
         return routes.size();
     }
 
-    public int getNumberOfAvailableRoutes() {
+    public int getNumberOfOperatingRoutes() {
         int numberOfAvailableRoutes = 0;
 
         for (Route route : routes) {

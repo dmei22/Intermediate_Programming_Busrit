@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+    <div th:fragment="busCards(buses)" class="row row-cols-1 row-cols-md-6 g-3">
+        <div th:each="bus : ${buses}" th:insert="~{:: busCard(bus)}"></div>
+        <div class="col">
+            <div class="card h-100">
+                <a th:href="@{/bus/new}">
+                    <img height="350px" src="https://img.freepik.com/premium-vector/question-mark-pattern-background-vector-illustration_34480-1425.jpg?semt=ais_hybrid&w=740" class="card-img-top object-fit-cover" alt="Add a new Bus">
+                </a>
+                <div class="card-header">
+                    <a th:href="@{/bus/new}">
+                        <h1 class="card-title">Add</h1>
+                    </a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-body-secondary" th:text="|add new bus to planner|"></small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="busCard(bus)" class="col">
+        <div class="card h-100">
+            <a th:href="@{/bus/detail/{busLineNumber}(busLineNumber = ${bus.lineNumber})}">
+                <img height="350px" th:src="${bus.imageUrl}" class="card-img-top object-fit-cover" th:alt="|Image for bus line ${bus.lineNumber}|">
+            </a>
+
+            <div class="card-header">
+                <a th:href="@{/bus/detail/{busLineNumber}(busLineNumber = ${bus.lineNumber})}">
+                    <h1 class="card-title" th:text="${bus.lineNumber}"></h1>
+                </a>
+            </div>
+            <div class="card-footer">
+                <small class="text-body-secondary" th:text="|Operating: ${bus.numberOfOperatingRoutes}/${bus.numberOfRoutes} routes|"></small>
+            </div>
+
+            <div>
+                <span th:text="${bus.travelerNames}"></span>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
