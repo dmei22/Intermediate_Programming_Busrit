@@ -66,7 +66,7 @@ public class BusController {
         return "redirect:/bus/overview";
     }
 
-    @GetMapping("/bus/detail/{lineNumber}")
+    @GetMapping("/bus/details/{lineNumber}")
     private String showBusDetailPage(@PathVariable("lineNumber") int lineNumber, Model dataModel) {
         Optional<Bus> busOptional = busRepository.findByLineNumber(lineNumber);
 

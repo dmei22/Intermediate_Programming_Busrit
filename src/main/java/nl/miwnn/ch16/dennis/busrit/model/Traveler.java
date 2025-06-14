@@ -1,15 +1,19 @@
 package nl.miwnn.ch16.dennis.busrit.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.awt.print.Book;
+import java.util.Set;
 
 @Entity
 public class Traveler {
 
     @Id @GeneratedValue
     private Long travelerId;
+
+//    @ManyToOne
+//    private Bus bus;
 
     private String name;
 

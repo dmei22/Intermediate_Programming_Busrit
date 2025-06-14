@@ -7,24 +7,33 @@
 <div th:replace="~{fragments/general :: navbar}"></div>
 
 <div class="container">
-    <h1>Overview of all Travelers</h1>
-    <form th:action="@{/traveler/save}" method="post" th:object="${formTraveler}">
-        <table>
-            <tr>
-                <th>Name</th>
-                <th></th>
-            </tr>
-            <tr th:each="traveler : ${allTravelers}">
-                <td th:text="${traveler.name}"></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><input type="text" th:field="*{name}" /></td>
-                <td><input type="submit" value="save passenger" /></td>
-            </tr>
-        </table>
-    </form>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <h1>Overview of all Travelers</h1>
 
+            <table class="table table-striped shadow p-3 mb-5">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="traveler : ${allTravelers}">
+                        <td th:text="${traveler.name}"></td>
+                        <td><a th:href="@{/traveler/delete/{travelerId}(travelerId = ${traveler.travelerId})}">Remove</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <form th:action="@{/traveler/save}" method="post" th:object="${formTraveler}">
+                <input type="text" th:field="*{name}" placeholder="Add new Traveler">
+                <input type="submit" value="save" />
+            </form>
+
+        </div>
+    </div>
 </div>
 
 <div th:replace="~{fragments/general :: footer}"></div>
