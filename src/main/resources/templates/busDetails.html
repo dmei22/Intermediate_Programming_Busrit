@@ -8,7 +8,37 @@
 
 <div class="container">
 
-    
+<!--p-5: padding size 5-->
+<!--mb-4: margin bottom size 4-->
+    <div class="p-5 mb-4 rounded-4 shadow">
+<!--    py-4: padding on y-axis (top and bottom)-->
+        <div class="container py-5">
+
+            <h1 class="display-5 fw-bold"><span th:text="${bus.lineNumber}"></span></h1>
+
+            <div class="row">
+                <p class="col-md-8 fs-4">
+                    Bus line <span class="fw-bold" th:text="${bus.lineNumber}"></span> operates in the <span class="fw-bold" th:text="${bus.region}"></span> region, providing transportation across a network of <span class="fw-bold" th:text="${bus.numberOfRoutes}"></span> different routes, with <span class="fw-bold" th:text="${bus.numberOfOperatingRoutes}"></span> currently in operation.
+                    This bus is equipped with <span class="fw-bold" th:text="${bus.numberOfSeats}"></span> seats, making it suitable for handling a moderate number of passengers during daily operations.
+                    It's route coverage and seating capacity make it an essential part of the area's public transport system.
+                </p>
+                <div class="col-md-3">
+                    <img height="200px" class="object-fit-cover rounded-3" th:src="${bus.imageUrl}" th:alt="|Image of bus line ${bus.lineNumber}|">
+                </div>
+            </div>
+
+            <p class="text-muted">
+                Travelers on this bus: <span th:text="${bus.travelerNames}"></span>
+            </p>
+
+            <a th:href="@{/bus/delete/{busId}(busId = ${bus.busId})}" class="btn btn-danger btn-lg shadow-lg">Delete Bus</a>
+
+            <a th:href="@{/bus/delete/{busId}(busId = ${bus.busId})}" class="btn btn-warning btn-lg shadow-lg">Edit Bus</a>
+
+        </div>
+    </div>
+
+    <div th:replace="~{/fragments/route :: routeCards(${bus.routes})}" ></div>
 
 </div>
 

@@ -33,4 +33,23 @@ public class RouteController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/route/toggle/{routeId}")
+    private String toggleRoute(@PathVariable("routeId") Long routeId) {
+        Optional<Route> routeOptional = routeRepository.findById(routeId);
+
+        if (routeOptional.isPresent()) {
+            boolean isOperating = routeOptional.get().getOperating();
+
+            if (isOperating) {
+                routeOptional.get().setOperating(false);
+            } else {
+                routeOptional.get().setOperating(true);
+            }
+
+            routeRepository.save(routeOptional.get());
+        }
+
+        return "redirect:/bus/overview/";
+    }
 }

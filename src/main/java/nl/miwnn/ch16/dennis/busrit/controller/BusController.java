@@ -24,11 +24,9 @@ public class BusController {
         this.travelerRepository = travelerRepository;
     }
 
-    private String setupBusDetail(Model dataModel, Bus busToShow, Bus formBus, boolean formModalHidden) {
+    // Toegevoegde waarde momenteel niet aanwezig, eerst functioneel maken
+    private String setupBusDetail(Model dataModel, Bus busToShow) {
         dataModel.addAttribute("bus", busToShow);
-        dataModel.addAttribute("formBus", formBus);
-        dataModel.addAttribute("allBuses", busRepository.findAll());
-        dataModel.addAttribute("formModalHidden", formModalHidden);
 
         return "busDetails";
     }
@@ -74,7 +72,7 @@ public class BusController {
             return "redirect:/bus/overview";
         }
 
-        return setupBusDetail(dataModel, busOptional.get(), busOptional.get(), true);
+        return setupBusDetail(dataModel, busOptional.get());
     }
 }
 
