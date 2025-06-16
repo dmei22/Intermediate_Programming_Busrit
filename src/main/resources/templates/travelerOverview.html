@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="~{/fragments/general :: baseheader(~{:: title})}">
     <title>Replace this title</title>
 </head>
@@ -21,13 +21,13 @@
                 <tbody>
                     <tr th:each="traveler : ${allTravelers}">
                         <td th:text="${traveler.name}"></td>
-                        <td><a th:href="@{/traveler/delete/{travelerId}(travelerId = ${traveler.travelerId})}">Remove</a></td>
+                        <td><a sec:authorize="isAuthenticated()" th:href="@{/traveler/delete/{travelerId}(travelerId = ${traveler.travelerId})}">Remove</a></td>
                     </tr>
                 </tbody>
             </table>
 
 
-            <form th:action="@{/traveler/save}" method="post" th:object="${formTraveler}">
+            <form th:action="@{/traveler/save}" method="post" th:object="${formTraveler}" sec:authorize="isAuthenticated()">
                 <input type="text" th:field="*{name}" placeholder="Add new Traveler">
                 <input type="submit" value="save" />
             </form>
