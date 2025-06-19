@@ -1,0 +1,14 @@
+
+.card:hover, .zoom:hover {
+    transition: transform .5s;
+    transform: scale(1.1);
+}
+
+.card-img-top {
+    height: 250px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

@@ -7,8 +7,10 @@
     <div th:replace="~{fragments/general :: navbar}"></div>
 
     <div class="container">
-        <h1>Overview of all Buses</h1>
-        <div th:replace="~{fragments/bus :: busCards(${allBuses})}"></div>
+        <div class="row justify-content-center">
+            <h1>Overview of all Buses</h1>
+            <div th:replace="~{fragments/bus :: busCards(${allBuses})}"></div>
+        </div>
     </div>
 
     <div th:replace="~{fragments/general :: footer}"></div>

@@ -9,20 +9,34 @@
 <div class="container">
 
         <div th:fragment="routeCards(routes)" class="row justify-content-md-start">
-            <div th:each="route, count : ${routes}" th:insert="~{:: routeCard(route, count)}" class="col-sm-3">
+
+            <div th:each="route : ${routes}" th:insert="~{:: routeCard(route)}" class="col-sm-3">
             </div>
+
+            <div class="col-sm-2">
+                <a th:href="@{/}" >
+                    <div class="p-2 mb-4 rounded-4 shadow zoom text-light bg-secondary">
+                        <div class="container py-2">
+                            <p>Add new Route</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
         </div>
 
-        <div th:fragment="routeCard(route, count)">
-            <div class="p-2 mb-4 rounded-4 shadow">
-                <div class="container py-2">
-                    <h2>Route <span th:text="${count.count}"></span></h2>
-                    <p>currently <span th:text="${route.operating} ? '' : 'not'"></span> operating</p>
-                    <a th:href="@{route/toggle/${route.routeId}}"></a>
+        <div th:fragment="routeCard(route)">
+            <a th:href="@{/route/toggle/{routeId}(routeId = ${route.routeId})}" >
+                <div class="p-2 mb-4 rounded-4 shadow zoom text-light"
+                     th:classappend="${route.operating} ? 'bg-primary' : 'bg-warning'">
+                    <div class="container py-2">
+                            <p><span th:text="${route.startStation}"></span> - <span th:text="${route.endStation}"></span></p>
+                            <p class="small">currently <span th:text="${route.operating} ? '' : 'not'"></span> operating</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
-
+    </a>
 </div>
 
 <div th:replace="~{fragments/general :: footer}"></div>

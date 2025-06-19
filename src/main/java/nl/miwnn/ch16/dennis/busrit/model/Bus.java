@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class Bus {
     @Id
     @GeneratedValue
-    private long busId;
+    private Long busId;
 
     @Column(unique = true)
     private int lineNumber;

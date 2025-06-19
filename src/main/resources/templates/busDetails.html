@@ -23,8 +23,9 @@
                     It's route coverage and seating capacity make it an essential part of the area's public transport system.
                 </p>
                 <div class="col-md-3">
-                    <img height="200px" class="object-fit-cover rounded-3 shadow" th:src="${bus.imageUrl}" th:alt="|Image of bus line ${bus.lineNumber}|">
+                    <img class="img-fluid object-fit-cover h-100 w-100 rounded-3 shadow" th:src="${bus.imageUrl}" th:alt="|Image of bus line ${bus.lineNumber}|">
                 </div>
+
             </div>
 
             <p class="text-muted">
@@ -33,7 +34,7 @@
 
             <a th:href="@{/bus/delete/{busId}(busId = ${bus.busId})}" class="btn btn-danger btn-lg shadow-lg">Delete Bus</a>
 
-            <a th:href="@{/bus/delete/{busId}(busId = ${bus.busId})}" class="btn btn-warning btn-lg shadow-lg">Edit Bus</a>
+            <a th:href="@{/bus/edit/{busId}(busId = ${bus.busId})}" class="btn btn-warning btn-lg shadow-lg">Edit Bus</a>
 
         </div>
     </div>

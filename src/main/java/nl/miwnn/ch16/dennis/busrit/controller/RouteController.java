@@ -1,13 +1,13 @@
 package nl.miwnn.ch16.dennis.busrit.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import nl.miwnn.ch16.dennis.busrit.model.Bus;
 import nl.miwnn.ch16.dennis.busrit.model.Route;
 import nl.miwnn.ch16.dennis.busrit.repositories.BusRepository;
 import nl.miwnn.ch16.dennis.busrit.repositories.RouteRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -34,22 +34,13 @@ public class RouteController {
         return "redirect:/";
     }
 
-    @GetMapping("/route/toggle/{routeId}")
-    private String toggleRoute(@PathVariable("routeId") Long routeId) {
+    @GetMapping("/toggle/{routeId}")
+    private String toggleOperating(@PathVariable("routeId") Long routeId, HttpServletRequest request) {
         Optional<Route> routeOptional = routeRepository.findById(routeId);
-
         if (routeOptional.isPresent()) {
-            boolean isOperating = routeOptional.get().getOperating();
-
-            if (isOperating) {
-                routeOptional.get().setOperating(false);
-            } else {
-                routeOptional.get().setOperating(true);
-            }
-
+            routeOptional.get().toggleOperating();
             routeRepository.save(routeOptional.get());
         }
-
-        return "redirect:/bus/overview/";
+        return "redirect:" + request.getHeader("Referer");
     }
 }
